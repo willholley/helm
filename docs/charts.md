@@ -574,11 +574,12 @@ cannot be overridden. As with all values, the names are _case
 sensitive_.
 
 - `Release.Name`: The name of the release (not the chart)
-- `Release.Service`: The service that conducted the release. Usually
-  this is `Tiller`.
-- `Release.IsUpgrade`: This is set to true if the current operation is an upgrade or rollback.
-- `Release.IsInstall`: This is set to true if the current operation is an
-  install.
+- `Release.Time`: The time the chart release was last updated. This will match the Last Released time on a Release object.
+- `Release.Namespace`: The namespace the chart was released to.
+- `Release.Service`: The name of the releasing service (always `Tiller`).
+- `Release.IsUpgrade`: This is set to `true` if the current operation is an upgrade or rollback.
+- `Release.IsInstall`: This is set to `true` if the current operation is an install.
+- `Release.Revision`: The revision number. It begins at 1, and increments with each helm upgrade.
 - `Chart`: The contents of the `Chart.yaml`. Thus, the chart version is
   obtainable as `Chart.Version` and the maintainers are in
   `Chart.Maintainers`.

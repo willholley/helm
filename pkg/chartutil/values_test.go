@@ -27,6 +27,7 @@ import (
 
 	"k8s.io/helm/pkg/hapi/chart"
 	"k8s.io/helm/pkg/version"
+	"github.com/golang/protobuf/ptypes/timestamp"
 )
 
 func TestReadValues(t *testing.T) {
@@ -103,6 +104,9 @@ where:
 
 	o := ReleaseOptions{
 		Name:      "Seven Voyages",
+		Namespace: "my-namespace",
+		Time: timeconv.Now(),
+		Version: "1",
 		IsInstall: true,
 	}
 
@@ -124,6 +128,15 @@ where:
 	relmap := res["Release"].(map[string]interface{})
 	if name := relmap["Name"]; name.(string) != "Seven Voyages" {
 		t.Errorf("Expected release name 'Seven Voyages', got %q", name)
+	}
+	if name := relmap["Namespace"]; namespace.(*timestamp.Timestamp) != "my-namespace" {
+		t.Errorf("Expected namespace 'my-namespace', got %q", namespace)
+	}
+	if name := relmap["Time"]; time.(string) != "Seven Voyages" {
+		t.Errorf("Expected time 'Seven Voyages', got %q", time)
+	}
+	if name := relmap["Version"]; version.(string) != "Seven Voyages" {
+		t.Errorf("Expected version 'Seven Voyages', got %q", version)
 	}
 	if relmap["IsUpgrade"].(bool) {
 		t.Error("Expected upgrade to be false.")

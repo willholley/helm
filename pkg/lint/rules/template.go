@@ -50,7 +50,7 @@ func Templates(linter *support.Linter, values []byte, namespace string, strict b
 		return
 	}
 
-	options := chartutil.ReleaseOptions{Name: "testRelease"}
+	options := chartutil.ReleaseOptions{Name: "testRelease", Time: timeconv.Now(), Namespace: "testNamespace"}
 	caps := &chartutil.Capabilities{
 		APIVersions: chartutil.DefaultVersionSet,
 		KubeVersion: chartutil.DefaultKubeVersion,

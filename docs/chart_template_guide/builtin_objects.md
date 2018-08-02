@@ -7,10 +7,13 @@ Objects can be simple, and have just one value. Or they can contain other object
 In the previous section, we use `{{.Release.Name}}` to insert the name of a release into a template. `Release` is one of the top-level objects that you can access in your templates.
 
 - `Release`: This object describes the release itself. It has several objects inside of it:
-  - `Release.Name`: The release name
+  - `Release.Name`: The name of the release (not the chart)
+  - `Release.Time`: The time the chart release was last updated. This will match the Last Released time on a Release object.
+  - `Release.Namespace`: The namespace the chart was released to.
   - `Release.Service`: The name of the releasing service (always `Tiller`).
   - `Release.IsUpgrade`: This is set to `true` if the current operation is an upgrade or rollback.
   - `Release.IsInstall`: This is set to `true` if the current operation is an install.
+  - `Release.Revision`: The revision number. It begins at 1, and increments with each helm upgrade.
 - `Values`: Values passed into the template from the `values.yaml` file and from user-supplied files. By default, `Values` is empty.
 - `Chart`: The contents of the `Chart.yaml` file. Any data in `Chart.yaml` will be accessible here. For example `{{.Chart.Name}}-{{.Chart.Version}}` will print out the `mychart-0.1.0`.
   - The available fields are listed in the [Charts Guide](https://github.com/kubernetes/helm/blob/master/docs/charts.md#the-chartyaml-file)
